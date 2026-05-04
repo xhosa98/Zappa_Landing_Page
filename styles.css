@@ -1,0 +1,490 @@
+:root {
+      --negro: #0a0804;
+      --marron-oscuro: #1a1008;
+      --naranja: #e85d04;
+      --naranja-oscuro: #9a3c00;
+      --crema: #f5e6c8;
+      --crema-apagado: #c9b48a;
+      --gris-humo: #2a2015;
+      --amarillo: #f4a400;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--negro);
+      color: var(--crema);
+      font-family: 'Playfair Display', serif;
+      overflow-x: hidden;
+      cursor: crosshair;
+    }
+
+    /* NOISE TEXTURE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.4;
+    }
+
+    /* ─── HERO ─────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-izquierda {
+      background: var(--marron-oscuro);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 4rem 3rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-izquierda::after {
+      content: '';
+      position: absolute;
+      right: -1px;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--naranja);
+    }
+
+    .etiqueta {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--naranja);
+      margin-bottom: 2rem;
+    }
+
+    .hero-titulo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 10vw, 10rem);
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      color: var(--crema);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-titulo span {
+      display: block;
+      color: var(--naranja);
+    }
+
+    .hero-subtitulo {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--crema-apagado);
+      max-width: 38ch;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-fechas {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--crema-apagado);
+      letter-spacing: 0.1em;
+    }
+
+    .hero-derecha {
+      position: relative;
+      background: #0f0a05;
+      overflow: hidden;
+    }
+
+    /* Retrato abstracto con CSS */
+    .retrato {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .retrato-svg {
+      width: 90%;
+      max-width: 480px;
+      opacity: 0.85;
+      filter: sepia(0.3);
+      animation: flicker 8s infinite;
+    }
+
+    .retrato-img {
+      width: 90%;
+      max-width: 480px;
+      opacity: 0.85;
+      filter: sepia(0.3);
+      animation: flicker 8s infinite;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    @keyframes flicker {
+      0%, 95%, 100% { opacity: 0.85; }
+      96% { opacity: 0.7; }
+      97% { opacity: 0.85; }
+      98% { opacity: 0.6; }
+    }
+
+    .hero-nota {
+      position: absolute;
+      top: 3rem;
+      right: 2.5rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--naranja-oscuro);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      writing-mode: vertical-rl;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--naranja);
+      letter-spacing: 0.3em;
+      animation: pulsar 2s ease-in-out infinite;
+    }
+
+    @keyframes pulsar {
+      0%, 100% { opacity: 0.3; transform: translateX(-50%) translateY(0); }
+      50% { opacity: 1; transform: translateX(-50%) translateY(-6px); }
+    }
+
+    /* ─── CITA GRANDE ───────────────────────────── */
+    .seccion-cita {
+      background: var(--naranja);
+      padding: 5rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .seccion-cita::before {
+      content: '"';
+      position: absolute;
+      top: -2rem;
+      left: 2rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20rem;
+      color: var(--naranja-oscuro);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .cita-texto {
+      font-size: clamp(1.4rem, 3vw, 2.4rem);
+      font-style: italic;
+      line-height: 1.4;
+      color: var(--negro);
+      max-width: 70ch;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cita-fuente {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--naranja-oscuro);
+      margin-top: 1.5rem;
+      letter-spacing: 0.2em;
+    }
+
+    /* ─── ÁLBUM DESTACADO ───────────────────────── */
+    .seccion-album {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 70vh;
+    }
+
+    .album-visual {
+      background: var(--gris-humo);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .album-vinilo {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 0deg,
+        #111 0%, #333 5%, #111 10%, #222 15%, #0a0a0a 20%,
+        #333 25%, #111 30%, #222 35%, #111 40%, #333 45%,
+        #0a0a0a 50%, #222 55%, #111 60%, #333 65%, #111 70%,
+        #222 75%, #0a0a0a 80%, #333 85%, #111 90%, #222 95%, #111 100%
+      );
+      box-shadow:
+        0 0 0 8px #0a0a0a,
+        0 0 0 12px var(--naranja),
+        0 0 60px rgba(232, 93, 4, 0.3);
+      animation: girar 20s linear infinite;
+      position: relative;
+    }
+
+    .album-vinilo::after {
+      content: '';
+      position: absolute;
+      inset: 42%;
+      border-radius: 50%;
+      background: var(--marron-oscuro);
+      border: 2px solid var(--naranja-oscuro);
+    }
+
+    @keyframes girar {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .album-info {
+      background: var(--negro);
+      padding: 5rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-left: 3px solid var(--naranja);
+    }
+
+    .album-etiqueta {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--naranja);
+      margin-bottom: 1rem;
+    }
+
+    .album-titulo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      line-height: 0.95;
+      margin-bottom: 1.5rem;
+      color: var(--crema);
+    }
+
+    .album-anio {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1.2rem;
+      color: var(--amarillo);
+      margin-bottom: 2rem;
+    }
+
+    .album-desc {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--crema-apagado);
+      max-width: 40ch;
+    }
+
+    /* ─── DISCOGRAFÍA ───────────────────────────── */
+    .seccion-disco {
+      padding: 6rem 4rem;
+      background: var(--marron-oscuro);
+    }
+
+    .seccion-titulo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      letter-spacing: 0.05em;
+      margin-bottom: 3rem;
+      color: var(--crema);
+    }
+
+    .seccion-titulo span {
+      color: var(--naranja);
+    }
+
+    .disco-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1px;
+      background: var(--naranja-oscuro);
+      border: 1px solid var(--naranja-oscuro);
+    }
+
+    .disco-item {
+      background: var(--negro);
+      padding: 1.8rem 2rem;
+      transition: background 0.2s ease, transform 0.2s ease;
+      cursor: default;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .disco-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 0;
+      background: var(--naranja);
+      transition: width 0.25s ease;
+    }
+
+    .disco-item:hover::before { width: 4px; }
+
+    .disco-item:hover {
+      background: var(--gris-humo);
+    }
+
+    .disco-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--naranja-oscuro);
+      letter-spacing: 0.2em;
+      margin-bottom: 0.8rem;
+    }
+
+    .disco-titulo {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: var(--crema);
+    }
+
+    .disco-meta {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--crema-apagado);
+      letter-spacing: 0.1em;
+    }
+
+    .disco-anio {
+      color: var(--amarillo);
+    }
+
+    /* ─── DATOS BIOGRÁFICOS ─────────────────────── */
+    .seccion-bio {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 0;
+    }
+
+    .bio-texto {
+      background: var(--negro);
+      padding: 5rem 4rem;
+      border-right: 3px solid var(--naranja);
+    }
+
+    .bio-texto p {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: var(--crema-apagado);
+      margin-bottom: 1.5rem;
+      max-width: 65ch;
+    }
+
+    .bio-texto p:first-of-type::first-letter {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4rem;
+      line-height: 0.8;
+      float: left;
+      margin-right: 0.1em;
+      color: var(--naranja);
+    }
+
+    .bio-datos {
+      background: var(--gris-humo);
+      padding: 4rem 2.5rem;
+    }
+
+    .dato-fila {
+      border-bottom: 1px solid rgba(232, 93, 4, 0.2);
+      padding: 1.2rem 0;
+    }
+
+    .dato-fila:last-child { border-bottom: none; }
+
+    .dato-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--naranja);
+      margin-bottom: 0.4rem;
+    }
+
+    .dato-valor {
+      font-size: 0.95rem;
+      color: var(--crema);
+    }
+
+    /* ─── FOOTER ────────────────────────────────── */
+    footer {
+      background: var(--naranja);
+      padding: 2.5rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-nombre {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: var(--negro);
+      letter-spacing: 0.05em;
+    }
+
+    .footer-copy {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--naranja-oscuro);
+      letter-spacing: 0.15em;
+    }
+
+    /* ─── RESPONSIVE ────────────────────────────── */
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-derecha { display: none; }
+      .hero-izquierda { padding: 3rem 2rem 4rem; min-height: 100vh; }
+      .seccion-album { grid-template-columns: 1fr; }
+      .album-visual { padding: 3rem; min-height: 300px; }
+      .seccion-bio { grid-template-columns: 1fr; }
+      .bio-texto { border-right: none; border-bottom: 3px solid var(--naranja); }
+      .seccion-disco { padding: 4rem 1.5rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+      .seccion-cita { padding: 4rem 2rem; }
+    }
+
+    /* ─── ANIMACIONES DE ENTRADA ────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-izquierda > * {
+      animation: fadeUp 0.8s ease forwards;
+      opacity: 0;
+    }
+    .hero-izquierda > *:nth-child(1) { animation-delay: 0.1s; }
+    .hero-izquierda > *:nth-child(2) { animation-delay: 0.3s; }
+    .hero-izquierda > *:nth-child(3) { animation-delay: 0.5s; }
+    .hero-izquierda > *:nth-child(4) { animation-delay: 0.7s; }
